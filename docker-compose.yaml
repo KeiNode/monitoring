@@ -1,0 +1,33 @@
+version: '3.8'
+
+
+# database volumes
+volumes:
+  prometheus_data:
+    name: prometheus_data
+    driver: local
+
+  grafana_data:
+    name: grafana_data
+    driver: local
+
+networks:
+  monitoring:
+    name: monitoring
+
+
+# services data
+services:
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:laltest
+    restart: unless-stopped
+    volumes:
+      - 'prometheus_data:/prometheus'
+      - './config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml'
+    networks:
+      - monitoring
+    ports:
+      - '9090:9090'
+
+
