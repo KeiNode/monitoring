@@ -30,4 +30,12 @@ services:
     ports:
       - '9090:9090'
 
+  snmp_exporter:
+    container_name: snmp_exporter
+    image: prom/snmp-exporter
+    restart: unless-stopped
+    networks:
+      - monitoring
+
+
 
